@@ -1,3 +1,26 @@
+header {
+  background-color: #f2f2f2;
+}
+
+.navbar {
+  padding: 0;
+}
+.nav-link {
+  font-size: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+ul li {
+  display: inline-flex;
+  flex-direction: row;
+}
+ul li a {
+  color: inherit;
+}
+
 .fa-shopping-cart {
   color: darkviolet;
 }
@@ -8,12 +31,26 @@
   grid-gap: 25px;
   margin: 40px;
 }
-@media screen and (max-width: 800px) {
+.card-img {
+  height: 280px;
+}
+.card-name {
+  font-size: 20px;
+}
+
+.footer-contact {
+  background-color: #f2f2f2;
+}
+
+@media screen and (max-width: 900px) {
   .teddy-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     margin: 30px;
+  }
+  .card-img {
+    height: 200px;
   }
 }
 @media screen and (max-width: 400px) {
@@ -21,5 +58,8 @@
     display: grid;
     grid-template-columns: 1fr;
     margin: 20px;
+  }
+  .card-img {
+    height: 150px;
   }
 }
