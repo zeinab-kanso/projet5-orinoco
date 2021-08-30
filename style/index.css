@@ -1,3 +1,25 @@
 .fa-shopping-cart {
   color: darkviolet;
 }
+.teddy-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 25px;
+  margin: 40px;
+}
+@media screen and (max-width: 800px) {
+  .teddy-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin: 30px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .teddy-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 20px;
+  }
+}

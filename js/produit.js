@@ -4,25 +4,26 @@ class Produit {
   }
 }
 function $_GET(param) {
-	var vars = {};
-	window.location.href.replace( location.hash, '' ).replace( 
-		/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
-		function( m, key, value ) { // callback
-			vars[key] = value !== undefined ? value : '';
-		}
-	);
+  var vars = {};
+  window.location.href.replace(location.hash, '').replace(
+    /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+    function (m, key, value) {
+      // callback
+      vars[key] = value !== undefined ? value : '';
+    }
+  );
 
-	if ( param ) {
-		return vars[param] ? vars[param] : null;	
-	}
-	return vars;
+  if (param) {
+    return vars[param] ? vars[param] : null;
+  }
+  return vars;
 }
 
-   fetch('http://localhost:3000/api/teddies/'+ $_GET('id'))
+fetch('http://localhost:3000/api/teddies/' + $_GET('id'))
   .then((data) => data.json())
   .then((produit) => {
-    console.log (produit)
-      document.getElementById('details-produit').innerHTML += `
+    console.log(produit);
+    document.getElementById('details-produit').innerHTML += ` 
         <div class="card  ">
           <div class="card-img">
           <img src="${produit.imageUrl}" alt="teddy">
@@ -35,6 +36,4 @@ function $_GET(param) {
     </div>
  
        </div>`;
-    
   });
-
