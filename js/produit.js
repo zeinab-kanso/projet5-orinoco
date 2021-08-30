@@ -23,17 +23,14 @@ fetch('http://localhost:3000/api/teddies/' + $_GET('id'))
   .then((data) => data.json())
   .then((produit) => {
     console.log(produit);
-    document.getElementById('details-produit').innerHTML += ` 
-        <div class="card  ">
-          <div class="card-img">
-          <img src="${produit.imageUrl}" alt="teddy">
-          </div>
+    document.getElementById('details-produit').innerHTML += `  
+    <div class="card  ">
+          <img src="${produit.imageUrl}" alt="teddy" class="card-img">
           <div class="card-body">  
             <h3 class="card-name"> ${produit.name} </h3>
             <p class="card-description">${produit.description}</p>
                   <div class="card-color"> </div>
             <span class="card-price">${produit.price / 100 + '€'} </span>
     </div>
- 
        </div>`;
   });

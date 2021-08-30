@@ -37,11 +37,18 @@ ul li a {
 .card-name {
   font-size: 20px;
 }
-
+.card-price {
+  font-style: italic;
+  font-weight: 400;
+}
 .footer-contact {
   background-color: #f2f2f2;
 }
-
+.btn {
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  font-weight: 500;
+}
 @media screen and (max-width: 900px) {
   .teddy-container {
     display: grid;
@@ -53,7 +60,7 @@ ul li a {
     height: 200px;
   }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .teddy-container {
     display: grid;
     grid-template-columns: 1fr;
