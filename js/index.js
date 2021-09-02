@@ -14,7 +14,7 @@ fetch('http://localhost:3000/api/teddies')
           </div>
           <a class="btn" href="produit.html?id=${produit._id}"><span>
            Voir l'article  </span> </a>
-          </div>
+         
         </div>`;
     }
   });
