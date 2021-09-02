@@ -15,7 +15,6 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
     console.log(produit);
     /* insertion des informations de la card du produit (structure html pour l'affichage du produit) */
     document.getElementById('details-produit').innerHTML += `  
-
     <div class="card">
           <img src="${produit.imageUrl}" alt="teddy" class="card-img">
           <div class="card-body">  
@@ -40,4 +39,28 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
       option.innerHTML = colorChoice[i];
       select.appendChild(option);
     }
+    /*gestion du panier*/
+    /* récupération des données séléctionnées par l'utilisateur et envoie au panier*/
+    /*sélection id formulaire*/
+
+    const idSelect = document.querySelector('#option-color');
+
+    /*sélection du boutton ajout au panier*/
+    const btn_envoyerPanier = document.querySelector('#btn-envoyer');
+    console.log(btn_envoyerPanier);
+    /*envoyer le panier*/
+    btn_envoyerPanier.addEventListener('click', (event) => {
+      event.preventDefault();
+      /*mettre le choix de l'utilisateur dans une variable*/
+      const choixSelect = idSelect.value;
+      /*récupération des valeurs de formulaires*/
+      let optionsProduit = {
+        id: produit._id,
+        nom: produit.name,
+        option_color: choixSelect,
+        quantité: 1,
+        prix: produit.price / 100 + '€',
+      };
+      console.log(optionsProduit);
+    });
   });
