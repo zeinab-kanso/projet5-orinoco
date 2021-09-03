@@ -71,3 +71,67 @@ console.log(prixTotal);
 /* code html*/
 const affichagePrixHtml = ` <div class="afficher-prix"> Le prix total est: ${prixTotal} € </div>`;
 recapFormulaire.insertAdjacentHTML('beforeend', affichagePrixHtml);
+
+/*formulaire validation*/
+const afficherFormulaireHtml = () => {
+  const panierFormulaire = document.querySelector('.container-panier');
+  const structureFormulaire = `
+<div class="produit-panier">
+  <form class="formulaire-validation">
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="PRENOM" />
+      </div>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="NOM" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-8">
+        <input
+          type="text"
+          class="form-control"
+          id="inputAddress"
+          placeholder="ADRESSE"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control"
+          id="inputCity"
+          placeholder="VILLE"
+        />
+      </div>
+      <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control"
+          id="inputCodeP"
+          placeholder="CODE POSTAL"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-8">
+        <input
+          type="email"
+          class="form-control"
+          id="inputEmail"
+          placeholder=" ADDRESSE EMAIL"
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <button type="submit" class="btn btn-primary">
+        Valider la commande
+      </button>
+    </div>
+  </form>
+</div>`;
+  panierFormulaire.insertAdjacentHTML('afterend', structureFormulaire);
+};
