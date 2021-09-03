@@ -66,7 +66,6 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
       /*local storage   */
       /* déclaration de la variable ds laquelle on met le key et le value dans le local storage" */
       let produitLocalStorage = JSON.parse(localStorage.getItem('articles'));
-      console.log(produitLocalStorage);
 
       /* fonct pop up */
       const popupConfirmation = () => {
