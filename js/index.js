@@ -11,7 +11,7 @@ fetch('http://localhost:3000/api/teddies')
           <div class="card-body">
             <h3 class="card-name"> ${produit.name} </h3>
             <p class="card-description">${produit.description}</p>
-            <span class="card-price">${produit.price / 100 + '€'} </span>
+            <span class="card-price">${produit.price} € </span>
           </div>
           <a class="btn" href="produit.html?id=${produit._id}"><span>
            Voir l'article  </span> </a>

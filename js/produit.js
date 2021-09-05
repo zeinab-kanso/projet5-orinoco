@@ -12,7 +12,6 @@ console.log(newId);
 fetch(`http://localhost:3000/api/teddies/${newId}`)
   .then((data) => data.json())
   .then((produit) => {
-    console.log(produit);
     /* insertion des informations de la card du produit (structure html pour l'affichage du produit) */
     document.getElementById('details-produit').innerHTML += `  
     <div class="card">
@@ -20,7 +19,7 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
           <div class="card-body">  
             <h3 class="card-name"> ${produit.name} </h3>
             <p class="card-description">${produit.description}</p> 
-            <span class="card-price">${produit.price / 100 + '€'} </span> 
+            <span class="card-price">${produit.price} € </span> 
             <div class="card-color">
            <label for="option-color"> Choix de la couleur :</label>
             <select name="colors" id="option-color">
@@ -47,7 +46,7 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
 
     /*sélection du boutton ajout au panier*/
     const btn_envoyerPanier = document.querySelector('#btn-envoyer');
-    console.log(btn_envoyerPanier);
+
     /*envoyer le panier*/
     btn_envoyerPanier.addEventListener('click', (event) => {
       event.preventDefault();
@@ -59,9 +58,8 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
         nom: produit.name,
         option_color: choixSelect,
         quantité: 1,
-        prix: produit.price / 100 + '€',
+        prix: produit.price,
       };
-      console.log(optionsProduit);
 
       /*local storage   */
       /* déclaration de la variable ds laquelle on met le key et le value dans le local storage" */
@@ -82,15 +80,13 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
       if (produitLocalStorage) {
         produitLocalStorage.push(optionsProduit);
         localStorage.setItem('articles', JSON.stringify(produitLocalStorage));
-        console.log(produitLocalStorage);
+
         popupConfirmation();
       } else {
         /* si il n'ya pas des produits stockés dans le local storage*/
         produitLocalStorage = [];
         produitLocalStorage.push(optionsProduit);
         localStorage.setItem('articles', JSON.stringify(produitLocalStorage));
-
-        console.log(produitLocalStorage);
       }
     });
   });
