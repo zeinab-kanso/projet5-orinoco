@@ -1,11 +1,10 @@
 /* déclaration de la variable ds laquelle on met le key et le value dans le local storage" */
 let produitLocalStorage = JSON.parse(localStorage.getItem('articles'));
-console.log(produitLocalStorage);
 
 /* affichage des produits du panier*/
 /* code html */
 const recapFormulaire = document.querySelector('.container-panier');
-console.log(recapFormulaire);
+
 let structureProduitPanier = [];
 let prixTotalPanier = 0;
 /* si le panier est vide */
@@ -24,7 +23,6 @@ if (produitLocalStorage === null) {
   for (j = 0; j < produitLocalStorage.length; j++) {
     /*additionner le prix*/
     prixTotalPanier = produitLocalStorage[j].prix + prixTotalPanier;
-
     structureProduitPanier =
       structureProduitPanier +
       `
@@ -45,7 +43,6 @@ if (produitLocalStorage === null) {
 /*prix total du panier (code html)*/
 const affichagePrixHtml = ` <div class="afficher-prix"> Le prix total est: ${prixTotalPanier} € </div>`;
 recapFormulaire.insertAdjacentHTML('beforeend', affichagePrixHtml);
-console.log(prixTotalPanier);
 
 /* boutton pour vider le panier */
 /* code html */
@@ -77,19 +74,18 @@ const afficherFormulaireHtml = () => {
   <form class="formulaire-validation">
     <div class="form-group row">
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="inputPrenom" placeholder="PRENOM" />
+        <input type="text" class="form-control" id="firstName" placeholder="PRENOM" />
       </div>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="inputNom" placeholder="NOM" />
+        <input type="text" class="form-control" id="lastName" placeholder="NOM" />
       </div>
     </div>
-
     <div class="form-group row">
       <div class="col-sm-8">
         <input
           type="text"
           class="form-control"
-          id="inputAddress"
+          id="address"
           placeholder="ADRESSE"
         />
       </div>
@@ -99,7 +95,7 @@ const afficherFormulaireHtml = () => {
         <input
           type="text"
           class="form-control"
-          id="inputCity"
+          id="city"
           placeholder="VILLE"
         />
       </div>
@@ -107,7 +103,7 @@ const afficherFormulaireHtml = () => {
         <input
           type="text"
           class="form-control"
-          id="inputCodeP"
+          id="codePostal"
           placeholder="CODE POSTAL"
         />
       </div>
@@ -117,26 +113,42 @@ const afficherFormulaireHtml = () => {
         <input
           type="email"
           class="form-control"
-          id="inputEmail"
+          id="email"
           placeholder=" ADDRESSE EMAIL"
         />
       </div>
     </div>
-
     <div class="form-row">
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" class="btn-primary">
         Valider la commande
       </button>
     </div>
   </form>
 </div>`;
-
   panierFormulaire.insertAdjacentHTML('afterend', structureFormulaire);
 };
 /*affichage formulaire*/
 afficherFormulaireHtml();
+
 //sélection bouton validation commande
-const btnValidationCommande = document.querySelector('.btn btn-primary');
-console.log(btnValidationCommande);
-//recuperation des valeurs de formulaire pour le local storage
-localStorage.setItem();
+const btnValidationCommande = document.querySelector('.btn-primary');
+
+//add event listener
+btnValidationCommande.addEventListener('click', (e) => {
+  e.preventDefault();
+  /*recuperation des valeurs de formulaire pour le local storage*/
+  const valeurFormulaire = {
+    firstName: document.querySelector('#firstName').value,
+    lastName: document.querySelector('#lastName').value,
+    address: document.querySelector('#address').value,
+    city: document.querySelector('#city').value,
+    codePostal: document.querySelector('#codePostal').value,
+    email: document.querySelector('#email').value,
+  };
+
+  /*mettre l'objet formulaire dans le local storage*/
+  localStorage.setItem('valeurFormulaire', JSON.stringify(valeurFormulaire));
+
+  //mettre les valeurs du formulaire dans un objet et les produits
+  const aEnvoyer = { produitLocalStorage, valeurFormulaire };
+});
