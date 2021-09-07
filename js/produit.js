@@ -24,6 +24,11 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
            <label for="option-color"> Choix de la couleur :</label>
             <select name="colors" id="option-color">
             </select> 
+            </div>
+            <div class="card-quantite">
+            <label for="quantite-produit"> Quantité:</label>
+            <select name="quantite" id="quantite-produit">
+            </select> 
           </div>
             </div>
             <button id="btn-envoyer" type="submit"><span>
@@ -38,6 +43,17 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
       option.innerHTML = colorChoice[i];
       select.appendChild(option);
     }
+    /*gestion quantité*/
+    const structureQuantite = `
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+`;
+    /* afficher les quantité dans le formulaire*/
+    const postionElementQuantite = document.querySelector('#quantite-produit');
+    postionElementQuantite.innerHTML = structureQuantite;
     /*gestion du panier*/
     /* récupération des données séléctionnées par l'utilisateur et envoie au panier*/
     /*sélection id formulaire*/
@@ -50,15 +66,20 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
     /*envoyer le panier*/
     btn_envoyerPanier.addEventListener('click', (event) => {
       event.preventDefault();
-      /*mettre le choix de l'utilisateur dans une variable*/
+      /*mettre le choix de couleur de l'utilisateur dans une variable*/
       const choixSelect = idSelect.value;
+      /*mettre le choix de quantité de l'utilisateur dans une variable*/
+      const choixQuantite = postionElementQuantite.value;
+      console.log('choixQuantite');
+      console.log(choixQuantite);
+
       /*récupération des valeurs de formulaires*/
       let optionsProduit = {
         id: produit._id,
         nom: produit.name,
         option_color: choixSelect,
-        quantité: 1,
-        prix: produit.price,
+        quantite: choixQuantite,
+        prix: produit.price * choixQuantite,
       };
 
       /*local storage   */

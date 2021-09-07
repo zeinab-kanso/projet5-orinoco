@@ -31,7 +31,7 @@ if (produitLocalStorage === null) {
     <li> <p> Nom du produit:</p> <span> ${produitLocalStorage[j].nom} </span> </li>
     <li>  <p>Couleur:</p> <span> ${produitLocalStorage[j].option_color}</span> </li>
     <li> <p> Quantité:</p><span>  ${produitLocalStorage[j].quantite}</span> </li>
-    <li>  <p>price: </p> <span> ${produitLocalStorage[j].prix} €</span> </li>
+    <li>  <p>Prix: </p> <span> ${produitLocalStorage[j].prix} €</span> </li>
     </ul>
     </div>
     `;
@@ -40,6 +40,11 @@ if (produitLocalStorage === null) {
   }
   recapFormulaire.innerHTML = structureProduitPanier;
 }
+
+// boutton supprimer l'article
+/* séléction des button supprimer*/
+let btn_supprimer = document.querySelectorAll('.btn-supprimer');
+console.log(btn_supprimer);
 /*prix total du panier (code html)*/
 const affichagePrixHtml = ` <div class="afficher-prix"> Le prix total est: ${prixTotalPanier} € </div>`;
 recapFormulaire.insertAdjacentHTML('beforeend', affichagePrixHtml);
@@ -145,6 +150,9 @@ btnValidationCommande.addEventListener('click', (e) => {
     codePostal: document.querySelector('#codePostal').value,
     email: document.querySelector('#email').value,
   };
+  /***** controle validation formulaire *****/
+  const lePrenom = valeurFormulaire.firstName;
+  console.log(lePrenom);
 
   /*mettre l'objet formulaire dans le local storage*/
   localStorage.setItem('valeurFormulaire', JSON.stringify(valeurFormulaire));
@@ -152,3 +160,17 @@ btnValidationCommande.addEventListener('click', (e) => {
   //mettre les valeurs du formulaire dans un objet et les produits
   const aEnvoyer = { produitLocalStorage, valeurFormulaire };
 });
+
+// mettre le contenu de local storage dans les champs du formulaire
+/*prendre le key dans le local storage et le mettre dans une variable*/
+const donneLocalStorage = localStorage.getItem('valeurFormulaire');
+/* convertir la chaine de caractere en objet js*/
+const donneLocalStorageObjet = JSON.parse(donneLocalStorage);
+/* mettre les valeurs de local storage dans les chanmps du formulaire*/
+
+document.querySelector('#firstName').value = donneLocalStorageObjet.firstName;
+document.querySelector('#lastName').value = donneLocalStorageObjet.lastName;
+document.querySelector('#address').value = donneLocalStorageObjet.address;
+document.querySelector('#city').value = donneLocalStorageObjet.city;
+document.querySelector('#codePostal').value = donneLocalStorageObjet.codePostal;
+document.querySelector('#email').value = donneLocalStorageObjet.email;
