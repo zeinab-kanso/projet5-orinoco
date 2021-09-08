@@ -166,15 +166,91 @@ btnValidationCommande.addEventListener('click', (e) => {
     codePostal: document.querySelector('#codePostal').value,
     email: document.querySelector('#email').value,
   };
-  /***** controle validation formulaire *****/
-  const lePrenom = valeurFormulaire.firstName;
-  console.log(lePrenom);
-
-  /*mettre l'objet formulaire dans le local storage*/
-  localStorage.setItem('valeurFormulaire', JSON.stringify(valeurFormulaire));
+  /***** controle validation formulaire ****/
+  const textAlert = (value) => {
+    return `${value}:Chiffre et symboles ne sont pas autorisés. \n Nombre de lettres doit etre ente 3 et 20. `;
+  };
+  const regExPrenomNomVille = (value) => {
+    return /^[A-Za-z]{3,20}$/.test(value);
+  };
+  const regExCodePostal = (value) => {
+    return /^[0-9]{5}$/.test(value);
+  };
+  const regExEmail = (value) => {
+    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
+  };
+  function prenomControle() {
+    /* controle du prenom*/
+    const lePrenom = valeurFormulaire.firstName;
+    if (regExPrenomNomVille(lePrenom)) {
+      return true;
+    } else {
+      alert(textAlert('PRENOM'));
+      return false;
+    }
+  }
+  function nomControle() {
+    /* controle du nom*/
+    const leNom = valeurFormulaire.lastName;
+    if (regExPrenomNomVille(leNom)) {
+      return true;
+    } else {
+      alert(textAlert('NOM'));
+      return false;
+    }
+  }
+  function codePostalControle() {
+    /* controle du code postal*/
+    const leCodePostal = valeurFormulaire.codePostal;
+    if (regExCodePostal(leCodePostal)) {
+      return true;
+    } else {
+      alert('Code Postal doit etre composé de 5 chiffres.');
+      return false;
+    }
+  }
+  function emailControle() {
+    /* controle du code postal*/
+    const leEmail = valeurFormulaire.email;
+    if (regExEmail(leEmail)) {
+      return true;
+    } else {
+      alert("Email n'est pas valide");
+      return false;
+    }
+  }
+  /* controle validite formulaire avant envoie dans le local storage*/
+  if (
+    prenomControle() &&
+    nomControle() &&
+    codePostalControle() &&
+    emailControle()
+  ) {
+    /*mettre l'objet formulaire dans le local storage*/
+    localStorage.setItem('valeurFormulaire', JSON.stringify(valeurFormulaire));
+  } else {
+    alert('Veuillez bien remplir le formulaire');
+  }
 
   //mettre les valeurs du formulaire dans un objet et les produits
   const aEnvoyer = { produitLocalStorage, valeurFormulaire };
+  /* envoie de l'objet vers le serveue*/
+  const promise01 = fetch('http://localhost:3000/api/teddies/order', {
+    method: 'POST',
+    body: JSON.stringify(aEnvoyer),
+    headers: { 'Content-Type': 'application/json' },
+  });
+  /* voir le résultats du serveur dans le console*/
+  promise01.then(async (response) => {
+    try {
+      console.log('response');
+      console.log(response);
+      const contenu = await response.json;
+      console.log(contenu);
+    } catch (e) {
+      console.log(e);
+    }
+  });
 });
 
 // mettre le contenu de local storage dans les champs du formulaire
