@@ -32,6 +32,7 @@ if (produitLocalStorage === null) {
     <li>  <p>Couleur:</p> <span> ${produitLocalStorage[j].option_color}</span> </li>
     <li> <p> Quantité:</p><span>  ${produitLocalStorage[j].quantite}</span> </li>
     <li>  <p>Prix: </p> <span> ${produitLocalStorage[j].prix} €</span> </li>
+    <li> <button class="btn-supprimer"> Supprimer</button></li>
     </ul>
     </div>
     `;
@@ -42,12 +43,25 @@ if (produitLocalStorage === null) {
 }
 
 // boutton supprimer l'article
-/* séléction des button supprimer*/
+/* séléction des bouttons supprimer*/
 let btn_supprimer = document.querySelectorAll('.btn-supprimer');
-console.log(btn_supprimer);
-/*prix total du panier (code html)*/
-const affichagePrixHtml = ` <div class="afficher-prix"> Le prix total est: ${prixTotalPanier} € </div>`;
-recapFormulaire.insertAdjacentHTML('beforeend', affichagePrixHtml);
+for (let m = 0; m < btn_supprimer.length; m++) {
+  btn_supprimer[m].addEventListener('click', (event) => {
+    event.preventDefault();
+    /* selection de l'id du produit qui va etre supprimer ene cliquant sur le bouton*/
+    let id_selection_supprimer = produitLocalStorage[m].id;
+    /* methode filter pour selectionner les elements à garder et supprimer les elements lors du clique*/
+    produitLocalStorage = produitLocalStorage.filter(
+      (el) => el.id !== id_selection_supprimer
+    );
+    /* envoyer la variable dans le local storage*/
+    /* transformation en format json et envoyer dans le key "produit" du local storage*/
+    localStorage.setItem('articles', JSON.stringify(produitLocalStorage));
+    /*alerte que le produit a ete supprimer*/
+    alert('Le produit sera supprimer');
+    window.location.href = 'panier.html';
+  });
+}
 
 /* boutton pour vider le panier */
 /* code html */
@@ -69,7 +83,9 @@ btn_vider_panier.addEventListener('click', (e) => {
   alert('Le panier sera vider');
   window.location.href = 'panier.html';
 });
-
+/*prix total du panier (code html)*/
+const affichagePrixHtml = ` <div class="afficher-prix"> Le prix total est: ${prixTotalPanier} € </div>`;
+recapFormulaire.insertAdjacentHTML('beforeend', affichagePrixHtml);
 /*formulaire validation*/
 const afficherFormulaireHtml = () => {
   const panierFormulaire = document.querySelector('.container-panier');
