@@ -8,7 +8,7 @@ const recapFormulaire = document.querySelector('.container-panier');
 let structureProduitPanier = [];
 let prixTotalPanier = 0;
 /* si le panier est vide */
-if (produitLocalStorage === null) {
+if (produitLocalStorage === null || produitLocalStorage.length === 0) {
   const panierVide = `
     <div class= "container-panier-vide">
     <div> Le panier est vide </div>
@@ -69,11 +69,11 @@ const btn_vider_panier_html = `
 <button class="btn-vider-panier"> Vider le panier 
 </button>
 `;
-console.log(recapFormulaire);
+
 recapFormulaire.insertAdjacentHTML('beforeend', btn_vider_panier_html);
 
 const btn_vider_panier = document.querySelector('.btn-vider-panier');
-console.log(btn_vider_panier);
+
 btn_vider_panier.addEventListener('click', (e) => {
   e.preventDefault();
 
@@ -166,6 +166,7 @@ btnValidationCommande.addEventListener('click', (e) => {
     codePostal: document.querySelector('#codePostal').value,
     email: document.querySelector('#email').value,
   };
+  console.log(valeurFormulaire);
   /***** controle validation formulaire ****/
   const textAlert = (value) => {
     return `${value}:Chiffre et symboles ne sont pas autorisés. \n Nombre de lettres doit etre ente 3 et 20. `;
@@ -178,6 +179,10 @@ btnValidationCommande.addEventListener('click', (e) => {
   };
   const regExEmail = (value) => {
     return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
+  };
+
+  const regExAddresse = (value) => {
+    return /^[A-Za-z0-9\s]{5,50}$/.test(value);
   };
   function prenomControle() {
     /* controle du prenom*/
@@ -199,6 +204,16 @@ btnValidationCommande.addEventListener('click', (e) => {
       return false;
     }
   }
+  function villeControle() {
+    /* controle du ville*/
+    const leVille = valeurFormulaire.city;
+    if (regExPrenomNomVille(leVille)) {
+      return true;
+    } else {
+      alert(textAlert('VILLE'));
+      return false;
+    }
+  }
   function codePostalControle() {
     /* controle du code postal*/
     const leCodePostal = valeurFormulaire.codePostal;
@@ -210,7 +225,7 @@ btnValidationCommande.addEventListener('click', (e) => {
     }
   }
   function emailControle() {
-    /* controle du code postal*/
+    /* controle email*/
     const leEmail = valeurFormulaire.email;
     if (regExEmail(leEmail)) {
       return true;
@@ -219,38 +234,52 @@ btnValidationCommande.addEventListener('click', (e) => {
       return false;
     }
   }
+  /* function AddressControle() {
+   controle address
+    const leAddress = valeurFormulaire.address;
+    if (regExAddress(leAddress)) {
+      return true;
+    } else {
+      alert("L'address doit contenir que des letters et des chiffres");
+      return false;
+    }
+  }*/
   /* controle validite formulaire avant envoie dans le local storage*/
   if (
     prenomControle() &&
     nomControle() &&
     codePostalControle() &&
-    emailControle()
+    emailControle() &&
+    /*AddressControle() &&*/
+    villeControle()
   ) {
     /*mettre l'objet formulaire dans le local storage*/
     localStorage.setItem('valeurFormulaire', JSON.stringify(valeurFormulaire));
   } else {
     alert('Veuillez bien remplir le formulaire');
   }
-
+  // création du tableau products (id teddy du panier)
+  let products = [];
+  for (optionsProduit of produitLocalStorage) {
+    let teddyId = optionsProduit.id;
+    products.push(teddyId);
+  }
+  console.log(products);
   //mettre les valeurs du formulaire dans un objet et les produits
-  const aEnvoyer = { produitLocalStorage, valeurFormulaire };
+
+  const aEnvoyer = {
+    products,
+    valeurFormulaire,
+  };
+  console.log(aEnvoyer);
+
   /* envoie de l'objet vers le serveue*/
-  const promise01 = fetch('http://localhost:3000/api/teddies/order', {
+  const options = {
     method: 'POST',
     body: JSON.stringify(aEnvoyer),
     headers: { 'Content-Type': 'application/json' },
-  });
-  /* voir le résultats du serveur dans le console*/
-  promise01.then(async (response) => {
-    try {
-      console.log('response');
-      console.log(response);
-      const contenu = await response.json;
-      console.log(contenu);
-    } catch (e) {
-      console.log(e);
-    }
-  });
+  };
+  console.log(options);
 });
 
 // mettre le contenu de local storage dans les champs du formulaire
