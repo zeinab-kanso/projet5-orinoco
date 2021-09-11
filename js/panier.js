@@ -95,14 +95,17 @@ const afficherFormulaireHtml = () => {
   <form class="formulaire-validation">
     <div class="form-group row">
       <div class="col-sm-4">
+      <label for="prenom"> Prénom</label>
         <input type="text" class="form-control" id="firstName" placeholder="PRENOM" />
       </div>
       <div class="col-sm-4">
+      <label for="nom"> Nom</label>
         <input type="text" class="form-control" id="lastName" placeholder="NOM" />
       </div>
     </div>
     <div class="form-group row">
       <div class="col-sm-8">
+      <label for="address"> Addresse</label>
         <input
           type="text"
           class="form-control"
@@ -113,6 +116,7 @@ const afficherFormulaireHtml = () => {
     </div>
     <div class="form-group row">
       <div class="col-md-4">
+      <label for="ville">Ville</label>
         <input
           type="text"
           class="form-control"
@@ -121,6 +125,7 @@ const afficherFormulaireHtml = () => {
         />
       </div>
       <div class="col-md-4">
+      <label for="codePostal">Code Postal</label>
         <input
           type="text"
           class="form-control"
@@ -131,6 +136,7 @@ const afficherFormulaireHtml = () => {
     </div>
     <div class="form-group row">
       <div class="col-sm-8">
+      <label for="email">Email</label>
         <input
           type="email"
           class="form-control"
@@ -158,7 +164,7 @@ const btnValidationCommande = document.querySelector('.btn-primary');
 btnValidationCommande.addEventListener('click', (e) => {
   e.preventDefault();
   /*recuperation des valeurs de formulaire pour le local storage*/
-  const valeurFormulaire = {
+  const contact = {
     firstName: document.querySelector('#firstName').value,
     lastName: document.querySelector('#lastName').value,
     address: document.querySelector('#address').value,
@@ -166,7 +172,7 @@ btnValidationCommande.addEventListener('click', (e) => {
     codePostal: document.querySelector('#codePostal').value,
     email: document.querySelector('#email').value,
   };
-  console.log(valeurFormulaire);
+  console.log(contact);
   /***** controle validation formulaire ****/
   const textAlert = (value) => {
     return `${value}:Chiffre et symboles ne sont pas autorisés. \n Nombre de lettres doit etre ente 3 et 20. `;
@@ -181,12 +187,12 @@ btnValidationCommande.addEventListener('click', (e) => {
     return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
   };
 
-  const regExAddresse = (value) => {
+  const regExAddress = (value) => {
     return /^[A-Za-z0-9\s]{5,50}$/.test(value);
   };
   function prenomControle() {
     /* controle du prenom*/
-    const lePrenom = valeurFormulaire.firstName;
+    const lePrenom = contact.firstName;
     if (regExPrenomNomVille(lePrenom)) {
       return true;
     } else {
@@ -196,7 +202,7 @@ btnValidationCommande.addEventListener('click', (e) => {
   }
   function nomControle() {
     /* controle du nom*/
-    const leNom = valeurFormulaire.lastName;
+    const leNom = contact.lastName;
     if (regExPrenomNomVille(leNom)) {
       return true;
     } else {
@@ -206,7 +212,7 @@ btnValidationCommande.addEventListener('click', (e) => {
   }
   function villeControle() {
     /* controle du ville*/
-    const leVille = valeurFormulaire.city;
+    const leVille = contact.city;
     if (regExPrenomNomVille(leVille)) {
       return true;
     } else {
@@ -216,7 +222,7 @@ btnValidationCommande.addEventListener('click', (e) => {
   }
   function codePostalControle() {
     /* controle du code postal*/
-    const leCodePostal = valeurFormulaire.codePostal;
+    const leCodePostal = contact.codePostal;
     if (regExCodePostal(leCodePostal)) {
       return true;
     } else {
@@ -225,8 +231,8 @@ btnValidationCommande.addEventListener('click', (e) => {
     }
   }
   function emailControle() {
-    /* controle email*/
-    const leEmail = valeurFormulaire.email;
+    /* controle validation email*/
+    const leEmail = contact.email;
     if (regExEmail(leEmail)) {
       return true;
     } else {
@@ -234,27 +240,27 @@ btnValidationCommande.addEventListener('click', (e) => {
       return false;
     }
   }
-  /* function AddressControle() {
-   controle address
-    const leAddress = valeurFormulaire.address;
+  function AddressControle() {
+    //controle address
+    const leAddress = contact.address;
     if (regExAddress(leAddress)) {
       return true;
     } else {
-      alert("L'address doit contenir que des letters et des chiffres");
+      alert("L'address doit contenir que des lettres et des chiffres");
       return false;
     }
-  }*/
+  }
   /* controle validite formulaire avant envoie dans le local storage*/
   if (
     prenomControle() &&
     nomControle() &&
     codePostalControle() &&
     emailControle() &&
-    /*AddressControle() &&*/
+    AddressControle() &&
     villeControle()
   ) {
     /*mettre l'objet formulaire dans le local storage*/
-    localStorage.setItem('valeurFormulaire', JSON.stringify(valeurFormulaire));
+    localStorage.setItem('contact', JSON.stringify(contact));
   } else {
     alert('Veuillez bien remplir le formulaire');
   }
@@ -265,29 +271,40 @@ btnValidationCommande.addEventListener('click', (e) => {
     products.push(teddyId);
   }
   console.log(products);
-  //mettre les valeurs du formulaire dans un objet et les produits
+  //mettre les valeurs du formulaire  et les produits séléctionnés dans un objet
 
   const aEnvoyer = {
     products,
-    valeurFormulaire,
+    contact,
   };
   console.log(aEnvoyer);
 
-  /* envoie de l'objet vers le serveue*/
+  /* envoie de l'objet vers le serveur*/
+  // requete POST avec methode Fetch
   const options = {
     method: 'POST',
+    // Pour valider la requête on a besoin d'un objet JSON contenant "contact" et "products"
     body: JSON.stringify(aEnvoyer),
     headers: { 'Content-Type': 'application/json' },
   };
   console.log(options);
+
+  fetch('http://localhost:3000/api/teddies/order', options)
+    .then((response) => response.json())
+    .then((aEnvoyer) => {
+      console.log('Success:', aEnvoyer);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 });
 
 // mettre le contenu de local storage dans les champs du formulaire
 /*prendre le key dans le local storage et le mettre dans une variable*/
-const donneLocalStorage = localStorage.getItem('valeurFormulaire');
+const donneLocalStorage = localStorage.getItem('contact');
 /* convertir la chaine de caractere en objet js*/
 const donneLocalStorageObjet = JSON.parse(donneLocalStorage);
-/* mettre les valeurs de local storage dans les chanmps du formulaire*/
+// mettre les valeurs de local storage dans les chanmps du formulaire
 
 document.querySelector('#firstName').value = donneLocalStorageObjet.firstName;
 document.querySelector('#lastName').value = donneLocalStorageObjet.lastName;
