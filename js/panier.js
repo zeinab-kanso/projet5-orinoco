@@ -92,40 +92,33 @@ const afficherFormulaireHtml = () => {
   /*code html*/
   const structureFormulaire = `
 <div class="formulaire">
-<h2> Remplir le formulaire pour valider la commande </h2>
+<h2>Remplir le formulaire pour valider la commande</h2>
   <form class="formulaire-validation">
-    <div class="prenom-nom">
-      <div class="prenom ">
+      <div class="form-text" id="prenom">
       <label for="prenom"> Prénom</label> <span id="prenom-manquant"></span>
         <input type="text" id="firstName" />
       </div>
-      <div class="nom">
+      <div class="form-text" id="nom">
       <label for="nom"> Nom</label><span id="nom-manquant"></span>
         <input type="text" id="lastName" />
       </div>
-    </div>
-    <div class="addresse"> 
+    <div class="form-text" id="addresse"> 
       <label for="address"> Addresse</label><span id="addresse-manquant"></span>
         <input type="text" id="address"/>
     </div>
-    <div class="ville-codep">
-      <div class="ville">
+      <div class="form-text" id="ville">
       <label for="ville">Ville</label><span id="ville-manquant"></span>
-        <input
-          type="text"
-          id="city"/>
+        <input type="text" id="city"/>
       </div>
-      <div class="codePostal">
+      <div class="form-text" id="code-postal">
       <label for="codePostal">Code Postal</label><span id="codepostal-manquant"></span>
         <input type="text" id="codePostal"/>
       </div>
-    </div>
-   <div class="mail">
+   <div class="form-text" id="address-mail">
       <label for="email">Email</label><span id="email-manquant"></span>
         <input type="email" id="email"/>
       </div>
-    </div>
-    <div class="form-row">
+    <div class="form-commande">
       <button type="submit" class="btn-primary">
         Valider la commande
       </button>

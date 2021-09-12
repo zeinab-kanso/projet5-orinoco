@@ -11,15 +11,15 @@ header {
   font-size: 20px;
 }
 
-ul {
+.navbar-menu ul {
   list-style-type: none;
   margin: 0;
 }
-ul li {
+.navbar-menu ul li {
   display: inline-flex;
   flex-direction: row;
 }
-ul li a {
+.navbar-menu ul li a {
   color: inherit;
   font-weight: 500;
 }
@@ -33,7 +33,51 @@ ul li a {
   padding: 30px 0 30px 30px;
   color: inherit;
 }
+.container-panier {
+  margin: 30px;
+}
+.produit-panier ul {
+  list-style-type: none;
+}
+.produit-panier ul li {
+  display: inline-flex;
+  flex-direction: row;
+}
+.formulaire {
+  margin: 30px;
+}
+h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
+.form-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding-bottom: 20px;
+}
+label {
+  align-content: space-around;
+  font-weight: bolder;
+}
+input {
+  width: 400px;
+  padding: 0;
+}
+#address-mail {
+  padding-bottom: 20px;
+}
+.form-commande {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 15px;
+}
 .footer-contact {
   background-color: #f2f2f2;
   text-align: center;
@@ -43,4 +87,9 @@ ul li a {
 .footer-mail {
   color: black;
   font-weight: bold;
+}
+@media screen and (max-width: 500px) {
+  input {
+    width: 100%;
+  }
 }
