@@ -4,7 +4,7 @@ class Produit {
     jsonProduit && Object.assign(this, jsonProduit);
   }
 }
-/* récupération de l'id du produit */
+// récupération de l'id du produit
 const queryString_url_id = window.location.search;
 const urlSearchParams = new URLSearchParams(queryString_url_id);
 const newId = urlSearchParams.get('id');
@@ -12,7 +12,7 @@ console.log(newId);
 fetch(`http://localhost:3000/api/teddies/${newId}`)
   .then((data) => data.json())
   .then((produit) => {
-    /* insertion des informations de la card du produit (structure html pour l'affichage du produit) */
+    // insertion des informations de la card du produit (structure html pour l'affichage du produit)
     document.getElementById('details-produit').innerHTML += `  
     <div class="card">
           <img src="${produit.imageUrl}" alt="teddy" class="card-img">
@@ -34,7 +34,7 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
             <button id="btn-envoyer" type="submit"><span>
          Ajouter au panier  </span> </ button>
     </div>`;
-    /* choix de la couleur */
+    // choix de la couleur
     const colorChoice = produit.colors;
     const select = document.querySelector('#option-color');
     for (let i = 0; i < colorChoice.length; i++) {
@@ -43,7 +43,7 @@ fetch(`http://localhost:3000/api/teddies/${newId}`)
       option.innerHTML = colorChoice[i];
       select.appendChild(option);
     }
-    /*gestion quantité*/
+    //gestion quantité
     const structureQuantite = `
 <option value="1">1</option>
 <option value="2">2</option>

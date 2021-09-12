@@ -92,57 +92,37 @@ const afficherFormulaireHtml = () => {
   /*code html*/
   const structureFormulaire = `
 <div class="formulaire">
+<h2> Remplir le formulaire pour valider la commande </h2>
   <form class="formulaire-validation">
-    <div class="form-group row">
-      <div class="col-sm-4">
-      <label for="prenom"> Prénom</label>
-        <input type="text" class="form-control" id="firstName" placeholder="PRENOM" />
+    <div class="prenom-nom">
+      <div class="prenom ">
+      <label for="prenom"> Prénom</label> <span id="prenom-manquant"></span>
+        <input type="text" id="firstName" />
       </div>
-      <div class="col-sm-4">
-      <label for="nom"> Nom</label>
-        <input type="text" class="form-control" id="lastName" placeholder="NOM" />
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-sm-8">
-      <label for="address"> Addresse</label>
-        <input
-          type="text"
-          class="form-control"
-          id="address"
-          placeholder="ADRESSE"
-        />
+      <div class="nom">
+      <label for="nom"> Nom</label><span id="nom-manquant"></span>
+        <input type="text" id="lastName" />
       </div>
     </div>
-    <div class="form-group row">
-      <div class="col-md-4">
-      <label for="ville">Ville</label>
+    <div class="addresse"> 
+      <label for="address"> Addresse</label><span id="addresse-manquant"></span>
+        <input type="text" id="address"/>
+    </div>
+    <div class="ville-codep">
+      <div class="ville">
+      <label for="ville">Ville</label><span id="ville-manquant"></span>
         <input
           type="text"
-          class="form-control"
-          id="city"
-          placeholder="VILLE"
-        />
+          id="city"/>
       </div>
-      <div class="col-md-4">
-      <label for="codePostal">Code Postal</label>
-        <input
-          type="text"
-          class="form-control"
-          id="codePostal"
-          placeholder="CODE POSTAL"
-        />
+      <div class="codePostal">
+      <label for="codePostal">Code Postal</label><span id="codepostal-manquant"></span>
+        <input type="text" id="codePostal"/>
       </div>
     </div>
-    <div class="form-group row">
-      <div class="col-sm-8">
-      <label for="email">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          placeholder=" ADDRESSE EMAIL"
-        />
+   <div class="mail">
+      <label for="email">Email</label><span id="email-manquant"></span>
+        <input type="email" id="email"/>
       </div>
     </div>
     <div class="form-row">
@@ -178,7 +158,7 @@ btnValidationCommande.addEventListener('click', (e) => {
     return `${value}:Chiffre et symboles ne sont pas autorisés. \n Nombre de lettres doit etre ente 3 et 20. `;
   };
   const regExPrenomNomVille = (value) => {
-    return /^[A-Za-z]{3,20}$/.test(value);
+    return /^[A-Za-z]{2,20}$/.test(value);
   };
   const regExCodePostal = (value) => {
     return /^[0-9]{5}$/.test(value);
@@ -190,67 +170,87 @@ btnValidationCommande.addEventListener('click', (e) => {
   const regExAddress = (value) => {
     return /^[A-Za-z0-9\s]{5,50}$/.test(value);
   };
+
+  // fonction pour gerer l'affichage du texte a cote de l'input pour indiquer que le champ doit etre rempli correctement
+  function dataChampManquantTextVide(querySelectorId) {
+    document.querySelector(`#${querySelectorId}`).textContent = '';
+  }
+  function dataChampManquantText(querySelectorId) {
+    document.querySelector(`#${querySelectorId}`).textContent =
+      'Veuillez bien remplir ce champ';
+  }
+  // controle du prenom
   function prenomControle() {
-    /* controle du prenom*/
     const lePrenom = contact.firstName;
     if (regExPrenomNomVille(lePrenom)) {
+      dataChampManquantTextVide('prenom-manquant');
       return true;
     } else {
-      alert(textAlert('PRENOM'));
+      dataChampManquantText('prenom-manquant');
+      alert(textAlert('prenom'));
       return false;
     }
   }
+  //controle du nom
   function nomControle() {
-    /* controle du nom*/
     const leNom = contact.lastName;
     if (regExPrenomNomVille(leNom)) {
+      dataChampManquantTextVide('nom-manquant');
       return true;
     } else {
-      alert(textAlert('NOM'));
+      dataChampManquantText('nom-manquant');
+      alert(textAlert('nom'));
       return false;
     }
   }
+  //controle du ville
   function villeControle() {
-    /* controle du ville*/
-    const leVille = contact.city;
-    if (regExPrenomNomVille(leVille)) {
+    const laVille = contact.city;
+    if (regExPrenomNomVille(laVille)) {
+      dataChampManquantTextVide('ville-manquant');
       return true;
     } else {
-      alert(textAlert('VILLE'));
+      dataChampManquantText('ville-manquant');
+      alert(textAlert('ville'));
       return false;
     }
   }
+  // controle du code postal
   function codePostalControle() {
-    /* controle du code postal*/
     const leCodePostal = contact.codePostal;
     if (regExCodePostal(leCodePostal)) {
+      dataChampManquantTextVide('codepostal-manquant');
       return true;
     } else {
+      dataChampManquantText('codepostal-manquant');
       alert('Code Postal doit etre composé de 5 chiffres.');
       return false;
     }
-  }
+  } // controle validation email
   function emailControle() {
-    /* controle validation email*/
     const leEmail = contact.email;
     if (regExEmail(leEmail)) {
+      dataChampManquantTextVide('email-manquant');
       return true;
     } else {
+      dataChampManquantText('email-manquant');
       alert("Email n'est pas valide");
       return false;
     }
   }
+  //controle address
   function AddressControle() {
-    //controle address
     const leAddress = contact.address;
     if (regExAddress(leAddress)) {
+      dataChampManquantTextVide('addresse-manquant');
       return true;
     } else {
+      dataChampManquantText('addresse-manquant');
       alert("L'address doit contenir que des lettres et des chiffres");
       return false;
     }
   }
-  /* controle validite formulaire avant envoie dans le local storage*/
+  // controle validite formulaire avant envoie dans le local storage
   if (
     prenomControle() &&
     nomControle() &&
@@ -259,7 +259,7 @@ btnValidationCommande.addEventListener('click', (e) => {
     AddressControle() &&
     villeControle()
   ) {
-    /*mettre l'objet formulaire dans le local storage*/
+    //mettre l'objet formulaire dans le local storage
     localStorage.setItem('contact', JSON.stringify(contact));
   } else {
     alert('Veuillez bien remplir le formulaire');
@@ -273,26 +273,26 @@ btnValidationCommande.addEventListener('click', (e) => {
   console.log(products);
   //mettre les valeurs du formulaire  et les produits séléctionnés dans un objet
 
-  const aEnvoyer = {
+  const dataAEnvoyer = {
     products,
     contact,
   };
-  console.log(aEnvoyer);
+  console.log(dataAEnvoyer);
 
   /* envoie de l'objet vers le serveur*/
   // requete POST avec methode Fetch
   const options = {
     method: 'POST',
     // Pour valider la requête on a besoin d'un objet JSON contenant "contact" et "products"
-    body: JSON.stringify(aEnvoyer),
+    body: JSON.stringify(dataAEnvoyer),
     headers: { 'Content-Type': 'application/json' },
   };
   console.log(options);
 
   fetch('http://localhost:3000/api/teddies/order', options)
     .then((response) => response.json())
-    .then((aEnvoyer) => {
-      console.log('Success:', aEnvoyer);
+    .then((dataAEnvoyer) => {
+      console.log('Success:', dataAEnvoyer);
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -300,9 +300,9 @@ btnValidationCommande.addEventListener('click', (e) => {
 });
 
 // mettre le contenu de local storage dans les champs du formulaire
-/*prendre le key dans le local storage et le mettre dans une variable*/
+//prendre le key dans le local storage et le mettre dans une variable
 const donneLocalStorage = localStorage.getItem('contact');
-/* convertir la chaine de caractere en objet js*/
+// convertir la chaine de caractere en objet js
 const donneLocalStorageObjet = JSON.parse(donneLocalStorage);
 // mettre les valeurs de local storage dans les chanmps du formulaire
 
