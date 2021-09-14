@@ -43,14 +43,19 @@
     <main>
       <div class="container-commande">
         <div class="recapitulatif-commande">
-          <p>Votre commande de numéro a bien été prise en compte</p>
-          <p>Le montant total est de</p>
-          <p>Orinoco vous remercie pour votre commande!</p>
+          <h3>Votre commande a bien été prise en compte</h3>
+          <p class="order-id">
+            Votre numéro de commande est: <span class="num-commande"></span>
+          </p>
+          <p class="prix-total">
+            Le montant total est de <span class="montant-total"></span> €.
+          </p>
+          <p class="remerciement">Orinoco vous remercie pour votre achat!</p>
         </div>
       </div>
     </main>
 
     <!--lien javascript-->
-    <script src="js/panier.js"></script>
+    <script src="js/confirmation.js"></script>
   </body>
 </html>

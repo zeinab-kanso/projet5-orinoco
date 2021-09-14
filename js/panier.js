@@ -265,6 +265,8 @@ if (panierVide() == false) {
     ) {
       //mettre l'objet formulaire dans le local storage
       localStorage.setItem('contact', JSON.stringify(contact));
+      localStorage.setItem('prixTotalPanier', JSON.stringify(prixTotalPanier));
+      console.log(prixTotalPanier);
 
       //mettre les valeurs du formulaire  et les produits séléctionnés dans un objet
       // création du tableau products (id teddy du panier)
@@ -298,7 +300,7 @@ if (panierVide() == false) {
           console.log(order.orderId);
           //mettre Id dans le local storage
           localStorage.setItem('orderId', order.orderId);
-          
+
           window.location.href = 'confirmation.html';
         })
         .catch((error) => {
