@@ -265,42 +265,48 @@ if (panierVide() == false) {
     ) {
       //mettre l'objet formulaire dans le local storage
       localStorage.setItem('contact', JSON.stringify(contact));
+
+      //mettre les valeurs du formulaire  et les produits séléctionnés dans un objet
+      // création du tableau products (id teddy du panier)
+      let products = [];
+      for (optionsProduit of produitLocalStorage) {
+        let teddyId = optionsProduit.id;
+        products.push(teddyId);
+      }
+      console.log(products);
+
+      const dataAEnvoyer = {
+        products,
+        contact,
+      };
+      console.log(dataAEnvoyer);
+
+      // envoie de l'objet vers le serveur
+      // requete POST avec methode Fetch
+      const options = {
+        method: 'POST',
+        // Pour valider la requête on a besoin d'un objet JSON contenant "contact" et "products"
+        body: JSON.stringify(dataAEnvoyer),
+        headers: { 'Content-Type': 'application/json' },
+      };
+      console.log(options);
+
+      fetch('http://localhost:3000/api/teddies/order', options)
+        .then((response) => response.json())
+        .then((order) => {
+          console.log('order');
+          console.log(order.orderId);
+          //mettre Id dans le local storage
+          localStorage.setItem('orderId', order.orderId);
+          
+          window.location.href = 'confirmation.html';
+        })
+        .catch((error) => {
+          console.log('Error:', error);
+        });
     } else {
       alert('Veuillez bien remplir le formulaire');
     }
-    // création du tableau products (id teddy du panier)
-    let products = [];
-    for (optionsProduit of produitLocalStorage) {
-      let teddyId = optionsProduit.id;
-      products.push(teddyId);
-    }
-    console.log(products);
-    //mettre les valeurs du formulaire  et les produits séléctionnés dans un objet
-
-    const dataAEnvoyer = {
-      products,
-      contact,
-    };
-    console.log(dataAEnvoyer);
-
-    /* envoie de l'objet vers le serveur*/
-    // requete POST avec methode Fetch
-    const options = {
-      method: 'POST',
-      // Pour valider la requête on a besoin d'un objet JSON contenant "contact" et "products"
-      body: JSON.stringify(dataAEnvoyer),
-      headers: { 'Content-Type': 'application/json' },
-    };
-    console.log(options);
-
-    fetch('http://localhost:3000/api/teddies/order', options)
-      .then((response) => response.json())
-      .then((dataAEnvoyer) => {
-        console.log('Success:', dataAEnvoyer);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
   });
 
   // mettre le contenu de local storage dans les champs du formulaire
