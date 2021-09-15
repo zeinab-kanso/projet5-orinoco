@@ -130,7 +130,7 @@ if (panierVide() == false) {
         <input type="email" id="email"/>
       </div>
     <div class="form-commande">
-      <button type="submit" class="btn-primary">
+      <button type="submit" class="btn-validation">
         Valider la commande
       </button>
     </div>
@@ -142,7 +142,7 @@ if (panierVide() == false) {
   afficherFormulaireHtml();
 
   //sélection bouton validation commande
-  const btnValidationCommande = document.querySelector('.btn-primary');
+  const btnValidationCommande = document.querySelector('.btn-validation');
 
   //add event listener
   btnValidationCommande.addEventListener('click', (e) => {
@@ -181,7 +181,7 @@ if (panierVide() == false) {
     }
     function dataChampManquantText(querySelectorId) {
       document.querySelector(`#${querySelectorId}`).textContent =
-        'Veuillez bien remplir ce champ';
+        'Veuillez bien remplir ce champ!';
     }
     // controle du prenom
     function prenomControle() {
@@ -191,7 +191,7 @@ if (panierVide() == false) {
         return true;
       } else {
         dataChampManquantText('prenom-manquant');
-        alert(textAlert('prenom'));
+        alert(textAlert('Prénom'));
         return false;
       }
     }
@@ -203,7 +203,7 @@ if (panierVide() == false) {
         return true;
       } else {
         dataChampManquantText('nom-manquant');
-        alert(textAlert('nom'));
+        alert(textAlert('Nom'));
         return false;
       }
     }
@@ -215,7 +215,7 @@ if (panierVide() == false) {
         return true;
       } else {
         dataChampManquantText('ville-manquant');
-        alert(textAlert('ville'));
+        alert(textAlert('Ville'));
         return false;
       }
     }
