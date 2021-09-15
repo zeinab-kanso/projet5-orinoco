@@ -1,6 +1,11 @@
+const orderId = localStorage.getItem('orderId');
 //récuperation de l'Id de la commande
-const orderId = document.querySelector('.order-id span');
-orderId.innerText = localStorage.getItem('orderId');
+if (!orderId) {
+  window.location.href = 'index.html';
+}
+
+const orderEls = document.querySelector('.order-id span');
+orderEls.innerText = orderId;
 console.log(orderId);
 
 //recuperation prix total de la commande

@@ -58,6 +58,7 @@ let btn_supprimer = document.querySelectorAll('.btn-supprimer');
 for (let m = 0; m < btn_supprimer.length; m++) {
   btn_supprimer[m].addEventListener('click', (event) => {
     event.preventDefault();
+
     /* selection de l'id du produit qui va etre supprimer ene cliquant sur le bouton*/
     let id_selection_supprimer = produitLocalStorage[m].id;
     /* methode filter pour selectionner les elements à garder et supprimer les elements lors du clique*/
