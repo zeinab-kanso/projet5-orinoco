@@ -41,3 +41,18 @@ ul li a {
   background-color: rgb(235, 221, 231);
   text-align: center;
 }
+.recapitulatif-commande h3 {
+  padding: 30px 0 30px 0;
+}
+.order-id {
+  font-size: 1.4rem;
+}
+.prix-total {
+  font-size: 1.4rem;
+}
+.remerciement {
+  padding: 30px 0 30px 0;
+  font-weight: bold;
+  font-size: 1.5rem;
+  font-style: italic;
+}
