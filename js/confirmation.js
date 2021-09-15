@@ -8,3 +8,5 @@ const prixTotalPanier = document.querySelector('.prix-total span');
 prixTotalPanier.innerText = localStorage.getItem('prixTotalPanier');
 console.log(prixTotalPanier);
 console.log('prixTotalPanier');
+
+localStorage.clear();

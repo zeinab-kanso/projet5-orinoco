@@ -157,10 +157,10 @@ if (panierVide() == false) {
       email: document.querySelector('#email').value,
     };
     console.log(contact);
-    /***** controle validation formulaire 
+    // controle validation formulaire
     const textAlert = (value) => {
       return `${value}:Chiffre et symboles ne sont pas autorisés. \n Nombre de lettres doit etre ente 3 et 20. `;
-    };****/
+    };
     const regExPrenomNomVille = (value) => {
       return /^([A-Za-z]{3,20})?([-]{0,1})?([A-Za-z]{3,20})$/.test(value);
     };
@@ -191,7 +191,7 @@ if (panierVide() == false) {
         return true;
       } else {
         dataChampManquantText('prenom-manquant');
-        //alert(textAlert('prenom'));
+        alert(textAlert('prenom'));
         return false;
       }
     }
@@ -203,7 +203,7 @@ if (panierVide() == false) {
         return true;
       } else {
         dataChampManquantText('nom-manquant');
-        //alert(textAlert('nom'));
+        alert(textAlert('nom'));
         return false;
       }
     }
@@ -215,7 +215,7 @@ if (panierVide() == false) {
         return true;
       } else {
         dataChampManquantText('ville-manquant');
-        //alert(textAlert('ville'));
+        alert(textAlert('ville'));
         return false;
       }
     }
