@@ -76,8 +76,10 @@ if (panierVide() == false) {
   /* boutton pour vider le panier */
   /* code html */
   const btn_vider_panier_html = `
-<button class="btn-vider-panier"> Vider le panier 
+  <div class="vider-panier">
+<button class="btn-vider-panier"> Vider le panier <i class="far fa-trash-alt"></i>
 </button>
+</div>
 `;
 
   recapFormulaire.insertAdjacentHTML('beforeend', btn_vider_panier_html);

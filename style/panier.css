@@ -58,15 +58,16 @@ header {
 .produit-panier ul li:nth-child(1) p {
   border-bottom: 2px solid black;
 }
-
-.btn-vider-panier {
-  margin-bottom: 20px;
+.vider-panier {
+  display: flex;
   justify-content: center;
-  align-items: center;
+  margin-bottom: 20px;
 }
+
 .afficher-prix {
   text-align: center;
   font-size: 1.2rem;
+  font-weight: bold;
 }
 .formulaire {
   margin: 30px;
