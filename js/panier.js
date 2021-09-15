@@ -38,10 +38,10 @@ if (produitLocalStorage === null || produitLocalStorage.length === 0) {
       `
     <div class="produit-panier">
     <ul>
-    <li> <p> Nom du produit:</p> <span> ${produitLocalStorage[j].nom} </span> </li>
-    <li>  <p>Couleur:</p> <span> ${produitLocalStorage[j].option_color}</span> </li>
-    <li> <p> Quantité:</p><span>  ${produitLocalStorage[j].quantite}</span> </li>
-    <li>  <p>Prix: </p> <span> ${produitLocalStorage[j].prix} €</span> </li>
+    <li><p> Nom du produit:</p> &nbsp;<span> ${produitLocalStorage[j].nom} </span> </li>
+    <li>  <p>Couleur:</p> &nbsp;<span> ${produitLocalStorage[j].option_color}</span> </li>
+    <li> <p> Quantité:</p>&nbsp;<span>  ${produitLocalStorage[j].quantite}</span> </li>
+    <li>  <p>Prix: </p> &nbsp;<span> ${produitLocalStorage[j].prix} €</span> </li>
     <li> <button class="btn-supprimer"> Supprimer</button></li>
     </ul>
     </div>

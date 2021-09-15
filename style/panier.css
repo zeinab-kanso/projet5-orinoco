@@ -41,12 +41,32 @@ header {
   font-weight: initial;
   font-size: 2rem;
 }
+.produit-panier {
+  padding-bottom: 20px;
+}
 .produit-panier ul {
   list-style-type: none;
 }
 .produit-panier ul li {
   display: inline-flex;
   flex-direction: row;
+  padding-right: 15px;
+}
+.produit-panier ul li p {
+  font-weight: bold;
+}
+.produit-panier ul li:nth-child(1) p {
+  border-bottom: 2px solid black;
+}
+
+.btn-vider-panier {
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.afficher-prix {
+  text-align: center;
+  font-size: 1.2rem;
 }
 .formulaire {
   margin: 30px;
@@ -105,5 +125,8 @@ input {
 @media screen and (max-width: 500px) {
   input {
     width: 100%;
+  }
+  .formulaire {
+    margin: 20px;
   }
 }
