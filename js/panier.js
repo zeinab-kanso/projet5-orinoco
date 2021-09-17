@@ -141,7 +141,7 @@ if (panierVide() == false) {
 </div>`;
     panierFormulaire.insertAdjacentHTML('afterend', structureFormulaire);
   };
-  /*affichage formulaire*/
+  /*fct affichage formulaire*/
   afficherFormulaireHtml();
 
   //sélection bouton validation commande
@@ -271,15 +271,14 @@ if (panierVide() == false) {
       localStorage.setItem('prixTotalPanier', JSON.stringify(prixTotalPanier));
       console.log(prixTotalPanier);
 
-      //mettre les valeurs du formulaire  et les produits séléctionnés dans un objet
-      // création du tableau products (id teddy du panier)
+      // création du tableau products (id teddy du panier) pour le mettre dans un objet
       let products = [];
       for (optionsProduit of produitLocalStorage) {
         let teddyId = optionsProduit.id;
         products.push(teddyId);
       }
       console.log(products);
-
+      //mettre les valeurs du formulaire  et les produits séléctionnés dans un objet
       const dataAEnvoyer = {
         products,
         contact,
@@ -313,19 +312,4 @@ if (panierVide() == false) {
       alert('Veuillez bien remplir le formulaire');
     }
   });
-
-  // mettre le contenu de local storage dans les champs du formulaire
-  //prendre le key dans le local storage et le mettre dans une variable
-  const donneLocalStorage = localStorage.getItem('contact');
-  // convertir la chaine de caractere en objet js
-  const donneLocalStorageObjet = JSON.parse(donneLocalStorage);
-  // mettre les valeurs de local storage dans les chanmps du formulaire
-
-  document.querySelector('#firstName').value = donneLocalStorageObjet.firstName;
-  document.querySelector('#lastName').value = donneLocalStorageObjet.lastName;
-  document.querySelector('#address').value = donneLocalStorageObjet.address;
-  document.querySelector('#city').value = donneLocalStorageObjet.city;
-  document.querySelector('#codePostal').value =
-    donneLocalStorageObjet.codePostal;
-  document.querySelector('#email').value = donneLocalStorageObjet.email;
 }

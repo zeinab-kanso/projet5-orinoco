@@ -78,11 +78,11 @@ if (newId !== null) {
       /*envoyer le panier*/
       btn_envoyerPanier.addEventListener('click', (event) => {
         event.preventDefault();
-        for(let p=0; p<produitLocalStorage.length; p++){
-      /* verifier s'il existe dans le local storage un produit avec le meme identifiant et couleur que le produit qui sera ajouté au panier*/
-      /*si le produit existe dans le panier augmenter sa quantité  */ 
-        }
-        /*si le produit n'existe pas dans le panier ajouter au panier  */ 
+        //for(let p=0; p<produitLocalStorage.length; p++){
+        /* verifier s'il existe dans le local storage un produit avec le meme identifiant et couleur que le produit qui sera ajouté au panier*/
+        /*si le produit existe dans le panier augmenter sa quantité  */
+        // }
+        /*si le produit n'existe pas dans le panier ajouter au panier  */
         /*mettre le choix de couleur de l'utilisateur dans une variable*/
         const choixSelect = idSelect.value;
         /*mettre le choix de quantité de l'utilisateur dans une variable*/
