@@ -5,10 +5,8 @@ let produitLocalStorage = JSON.parse(localStorage.getItem('articles'));
 function panierVide() {
   if (produitLocalStorage === null || produitLocalStorage.length === 0) {
     return true;
-    console.log('panier vide:true');
   } else {
     return false;
-    console.log('false');
   }
 }
 // affichage des produits du panier
@@ -159,7 +157,7 @@ if (panierVide() == false) {
       codePostal: document.querySelector('#codePostal').value,
       email: document.querySelector('#email').value,
     };
-    console.log(contact);
+
     // controle validation formulaire
     const textAlert = (value) => {
       return `${value}:Chiffre et symboles ne sont pas autorisés. \n Nombre de lettres doit etre ente 3 et 20. `;
@@ -269,7 +267,6 @@ if (panierVide() == false) {
       //mettre l'objet formulaire dans le local storage
       localStorage.setItem('contact', JSON.stringify(contact));
       localStorage.setItem('prixTotalPanier', JSON.stringify(prixTotalPanier));
-      console.log(prixTotalPanier);
 
       // création du tableau products (id teddy du panier) pour le mettre dans un objet
       let products = [];
@@ -277,13 +274,12 @@ if (panierVide() == false) {
         let teddyId = optionsProduit.id;
         products.push(teddyId);
       }
-      console.log(products);
+
       //mettre les valeurs du formulaire  et les produits séléctionnés dans un objet
       const dataAEnvoyer = {
         products,
         contact,
       };
-      console.log(dataAEnvoyer);
 
       // envoie de l'objet vers le serveur
       // requete POST avec methode Fetch
@@ -293,7 +289,6 @@ if (panierVide() == false) {
         body: JSON.stringify(dataAEnvoyer),
         headers: { 'Content-Type': 'application/json' },
       };
-      console.log(options);
 
       fetch('http://localhost:3000/api/teddies/order', options)
         .then((response) => response.json())

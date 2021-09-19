@@ -8,7 +8,7 @@ class Produit {
 const queryString_url_id = window.location.search;
 const urlSearchParams = new URLSearchParams(queryString_url_id);
 const newId = urlSearchParams.get('id');
-console.log(newId);
+
 if (newId !== null) {
   fetch(`http://localhost:3000/api/teddies/${newId}`)
     .then((data) => data.json())
@@ -83,7 +83,6 @@ if (newId !== null) {
         const choixSelect = idSelect.value;
         //mettre le choix de quantité de l'utilisateur dans une variable
         const choixQuantite = postionElementQuantite.value;
-        console.log(choixQuantite);
 
         //récupération des valeurs de formulaires
         let optionsProduit = {
