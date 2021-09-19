@@ -13,5 +13,5 @@ const prixTotalPanier = document.querySelector('.prix-total span');
 prixTotalPanier.innerText = localStorage.getItem('prixTotalPanier');
 console.log(prixTotalPanier);
 console.log('prixTotalPanier');
-
+// supprimer le local storage apres confirmation de la commande
 localStorage.clear();

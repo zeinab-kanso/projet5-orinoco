@@ -1,4 +1,4 @@
-/* déclaration de la variable ds laquelle on met le key et le value dans le local storage" */
+// déclaration de la variable ds laquelle on met le key et le value dans le local storage
 let produitLocalStorage = JSON.parse(localStorage.getItem('articles'));
 
 // fonction panier vide
@@ -11,13 +11,13 @@ function panierVide() {
     console.log('false');
   }
 }
-/* affichage des produits du panier*/
-/* code html */
+// affichage des produits du panier
+// code html
 const recapFormulaire = document.querySelector('.container-panier');
 
 let structureProduitPanier = [];
 let prixTotalPanier = 0;
-/* si le panier est vide */
+// si le panier est vide
 if (produitLocalStorage === null || produitLocalStorage.length === 0) {
   const panierVide = `
     <div class= "container-panier-vide">
@@ -26,12 +26,12 @@ if (produitLocalStorage === null || produitLocalStorage.length === 0) {
     `;
   recapFormulaire.innerHTML = panierVide;
 } else {
-  /* si le panier n'est pas vide*/
+  // si le panier n'est pas vide
 
-  /*variable prix total*/
+  //variable prix total
 
   for (j = 0; j < produitLocalStorage.length; j++) {
-    /*additionner le prix*/
+    //additionner le prix
     prixTotalPanier = produitLocalStorage[j].prix + prixTotalPanier;
     structureProduitPanier =
       structureProduitPanier +
@@ -53,29 +53,29 @@ if (produitLocalStorage === null || produitLocalStorage.length === 0) {
 }
 
 // boutton supprimer l'article
-/* séléction des bouttons supprimer*/
+// séléction des bouttons supprimer
 let btn_supprimer = document.querySelectorAll('.btn-supprimer');
 for (let m = 0; m < btn_supprimer.length; m++) {
   btn_supprimer[m].addEventListener('click', (event) => {
     event.preventDefault();
 
-    /* selection de l'id du produit qui va etre supprimer ene cliquant sur le bouton*/
+    // selection de l'id du produit qui va etre supprimer ene cliquant sur le bouton
     let id_selection_supprimer = produitLocalStorage[m].id;
-    /* methode filter pour selectionner les elements à garder et supprimer les elements lors du clique*/
+    // methode filter pour selectionner les elements à garder et supprimer les elements lors du clique
     produitLocalStorage = produitLocalStorage.filter(
       (el) => el.id !== id_selection_supprimer
     );
-    /* envoyer la variable dans le local storage*/
-    /* transformation en format json et envoyer dans le key "produit" du local storage*/
+    // envoyer la variable dans le local storage
+    // transformation en format json et envoyer dans le key "produit" du local storage
     localStorage.setItem('articles', JSON.stringify(produitLocalStorage));
-    /*alerte que le produit a ete supprimer*/
+    //alerte que le produit a ete supprimer
     alert('Le produit sera supprimer');
     window.location.href = 'panier.html';
   });
 }
 if (panierVide() == false) {
-  /* boutton pour vider le panier */
-  /* code html */
+  // boutton pour vider le panier
+  // code html
   const btn_vider_panier_html = `
   <div class="vider-panier">
 <button class="btn-vider-panier"> Vider le panier <i class="far fa-trash-alt"></i>
@@ -90,20 +90,20 @@ if (panierVide() == false) {
   btn_vider_panier.addEventListener('click', (e) => {
     e.preventDefault();
 
-    /* vider le local storage*/
+    // vider le local storage
 
     localStorage.removeItem('articles');
     alert('Le panier sera vider');
     window.location.href = 'panier.html';
   });
 
-  /*prix total du panier (code html)*/
+  //prix total du panier (code html)
   const affichagePrixHtml = ` <div class="afficher-prix"> Le prix total est: ${prixTotalPanier} € </div>`;
   recapFormulaire.insertAdjacentHTML('beforeend', affichagePrixHtml);
-  /*formulaire validation*/
+  //formulaire validation
   const afficherFormulaireHtml = () => {
     const panierFormulaire = document.querySelector('.container-panier');
-    /*code html*/
+    //code html
     const structureFormulaire = `
 <div class="formulaire">
 <h2>Remplir le formulaire pour valider la commande</h2>
@@ -141,7 +141,7 @@ if (panierVide() == false) {
 </div>`;
     panierFormulaire.insertAdjacentHTML('afterend', structureFormulaire);
   };
-  /*fct affichage formulaire*/
+  //fct affichage formulaire
   afficherFormulaireHtml();
 
   //sélection bouton validation commande
@@ -150,7 +150,7 @@ if (panierVide() == false) {
   //add event listener
   btnValidationCommande.addEventListener('click', (e) => {
     e.preventDefault();
-    /*recuperation des valeurs de formulaire pour le local storage*/
+    //recuperation des valeurs de formulaire pour le local storage
     const contact = {
       firstName: document.querySelector('#firstName').value,
       lastName: document.querySelector('#lastName').value,

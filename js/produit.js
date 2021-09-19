@@ -52,19 +52,19 @@ if (newId !== null) {
 <option value="4">4</option>
 <option value="5">5</option>
 `;
-      /* afficher les quantité dans le formulaire*/
+      // afficher les quantité dans le formulaire
       const postionElementQuantite =
         document.querySelector('#quantite-produit');
       postionElementQuantite.innerHTML = structureQuantite;
       /*gestion du panier*/
-      /* récupération des données séléctionnées par l'utilisateur et envoie au panier*/
-      /*sélection id formulaire*/
+      // récupération des données séléctionnées par l'utilisateur et envoie au panier
+      //sélection id formulaire
 
       const idSelect = document.querySelector('#option-color');
 
-      /*sélection du boutton ajout au panier*/
+      //sélection du boutton ajout au panier
       const btn_envoyerPanier = document.querySelector('#btn-envoyer');
-      /* fonct pop up */
+      // fonct pop up
       const popupConfirmation = () => {
         if (
           window.confirm(`Votre choix a bien été ajouter au panier.
@@ -75,22 +75,17 @@ if (newId !== null) {
           window.location.href = 'index.html';
         }
       };
-      /*envoyer le panier*/
+      //envoyer le panier
       btn_envoyerPanier.addEventListener('click', (event) => {
         event.preventDefault();
-        //for(let p=0; p<produitLocalStorage.length; p++){
-        /* verifier s'il existe dans le local storage un produit avec le meme identifiant et couleur que le produit qui sera ajouté au panier*/
-        /*si le produit existe dans le panier augmenter sa quantité  */
-        // }
-        /*si le produit n'existe pas dans le panier ajouter au panier  */
-        /*mettre le choix de couleur de l'utilisateur dans une variable*/
+
+        //mettre le choix de couleur de l'utilisateur dans une variable
         const choixSelect = idSelect.value;
-        /*mettre le choix de quantité de l'utilisateur dans une variable*/
+        //mettre le choix de quantité de l'utilisateur dans une variable
         const choixQuantite = postionElementQuantite.value;
-        console.log('choixQuantite');
         console.log(choixQuantite);
 
-        /*récupération des valeurs de formulaires*/
+        //récupération des valeurs de formulaires
         let optionsProduit = {
           id: produit._id,
           nom: produit.name,
@@ -99,17 +94,17 @@ if (newId !== null) {
           prix: produit.price * choixQuantite,
         };
 
-        /*local storage   */
-        /* déclaration de la variable ds laquelle on met le key et le value dans le local storage" */
+        /*local storage */
+        // déclaration de la variable ds laquelle on met le key et le value dans le local storage"
         let produitLocalStorage = JSON.parse(localStorage.getItem('articles'));
 
-        /* si les produits sont déja stockés dans lelocal storage*/
+        // si les produits sont déja stockés dans lelocal storage
 
         if (produitLocalStorage) {
           produitLocalStorage.push(optionsProduit);
           localStorage.setItem('articles', JSON.stringify(produitLocalStorage));
         } else {
-          /* si il n'ya pas des produits stockés dans le local storage*/
+          // si il n'ya pas des produits stockés dans le local storage
           produitLocalStorage = [];
           produitLocalStorage.push(optionsProduit);
           localStorage.setItem('articles', JSON.stringify(produitLocalStorage));
