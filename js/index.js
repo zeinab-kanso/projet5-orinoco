@@ -1,11 +1,12 @@
 //affichage des produits
-fetch('http://localhost:3000/api/teddies')
-  .then((data) => data.json())
-  .then((jsonListProduit) => {
-    for (let jsonProduit of jsonListProduit) {
-      let produit = new Produit(jsonProduit);
-      // insertion des produits (structure html pour l'affichage du produit)
-      document.querySelector('.teddy-container').innerHTML += `
+function affichageProduit() {
+  fetch('http://localhost:3000/api/teddies')
+    .then((data) => data.json())
+    .then((jsonListProduit) => {
+      for (let jsonProduit of jsonListProduit) {
+        let produit = new Produit(jsonProduit);
+        // insertion des produits (structure html pour l'affichage du produit)
+        document.querySelector('.teddy-container').innerHTML += `
           <div class="card">
           <img src="${produit.imageUrl}" alt="teddy" class="card-img">
           <div class="card-body">
@@ -17,5 +18,7 @@ fetch('http://localhost:3000/api/teddies')
            Voir l'article  </span> </a>
          
         </div>`;
-    }
-  });
+      }
+    });
+}
+affichageProduit();
