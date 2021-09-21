@@ -1,15 +1,17 @@
 //Récupération des données avec l'API Fetch
-function recuperationProduit() {
+function recuperationProduits() {
   fetch('http://localhost:3000/api/teddies')
     .then((data) => data.json())
     .then((jsonListProduit) => {
-      ajoutCarte(jsonListProduit);
+      ajoutCartes(jsonListProduit);
     });
 }
-function ajoutCarte(jsonListProduit) {
+
+// insertion des produits
+function ajoutCartes(jsonListProduit) {
   for (let jsonProduit of jsonListProduit) {
     let produit = new Produit(jsonProduit);
-    // insertion des produits (structure html pour l'affichage du produit)
+    //structure html pour l'affichage du produit
     document.querySelector('.teddy-container').innerHTML += `
           <div class="card">
           <img src="${produit.imageUrl}" alt="teddy" class="card-img">
@@ -24,4 +26,5 @@ function ajoutCarte(jsonListProduit) {
   }
 }
 
-recuperationProduit();
+//Appel à la fonction recuperationProduit
+recuperationProduits();

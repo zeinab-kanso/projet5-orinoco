@@ -99,7 +99,7 @@ if (panierVide() == false) {
   const affichagePrixHtml = ` <div class="afficher-prix"> Le prix total est: ${prixTotalPanier} € </div>`;
   recapFormulaire.insertAdjacentHTML('beforeend', affichagePrixHtml);
   //formulaire validation
-  const afficherFormulaireHtml = () => {
+  function afficherFormulaireHtml() {
     const panierFormulaire = document.querySelector('.container-panier');
     //code html
     const structureFormulaire = `
@@ -138,7 +138,7 @@ if (panierVide() == false) {
   </form>
 </div>`;
     panierFormulaire.insertAdjacentHTML('afterend', structureFormulaire);
-  };
+  }
   //fct affichage formulaire
   afficherFormulaireHtml();
 
@@ -231,7 +231,8 @@ if (panierVide() == false) {
         alert('Code Postal doit etre composé de 5 chiffres.');
         return false;
       }
-    } // controle validation email
+    } 
+    // controle validation email
     function emailControle() {
       const leEmail = contact.email;
       if (regExEmail(leEmail)) {
@@ -289,20 +290,18 @@ if (panierVide() == false) {
         body: JSON.stringify(dataAEnvoyer),
         headers: { 'Content-Type': 'application/json' },
       };
+      function envoieProduit() {
+        fetch('http://localhost:3000/api/teddies/order', options)
+          .then((response) => response.json())
+          .then((order) => {
+            //mettre Id dans le local storage
+            localStorage.setItem('orderId', order.orderId);
 
-      fetch('http://localhost:3000/api/teddies/order', options)
-        .then((response) => response.json())
-        .then((order) => {
-          console.log('order');
-          console.log(order.orderId);
-          //mettre Id dans le local storage
-          localStorage.setItem('orderId', order.orderId);
-
-          window.location.href = 'confirmation.html';
-        })
-        .catch((error) => {
-          console.log('Error:', error);
-        });
+            window.location.href = 'confirmation.html';
+          })
+          .catch((error) => alert('Veuillez bien remplir le formulaire !'));
+      }
+      envoieProduit();
     } else {
       alert('Veuillez bien remplir le formulaire');
     }
