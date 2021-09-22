@@ -26,11 +26,7 @@ if (produitLocalStorage === null || produitLocalStorage.length === 0) {
 } else {
   // si le panier n'est pas vide
 
-  //variable prix total
-
   for (j = 0; j < produitLocalStorage.length; j++) {
-    //additionner le prix
-    prixTotalPanier = produitLocalStorage[j].prix + prixTotalPanier;
     structureProduitPanier =
       structureProduitPanier +
       `
@@ -95,6 +91,12 @@ if (panierVide() == false) {
     window.location.href = 'panier.html';
   });
 
+  //variable prix total
+
+  for (j = 0; j < produitLocalStorage.length; j++) {
+    //additionner le prix
+    prixTotalPanier = produitLocalStorage[j].prix + prixTotalPanier;
+  }
   //prix total du panier (code html)
   const affichagePrixHtml = ` <div class="afficher-prix"> Le prix total est: ${prixTotalPanier} € </div>`;
   recapFormulaire.insertAdjacentHTML('beforeend', affichagePrixHtml);
@@ -231,7 +233,7 @@ if (panierVide() == false) {
         alert('Code Postal doit etre composé de 5 chiffres.');
         return false;
       }
-    } 
+    }
     // controle validation email
     function emailControle() {
       const leEmail = contact.email;

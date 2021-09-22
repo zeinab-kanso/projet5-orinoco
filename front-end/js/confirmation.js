@@ -1,5 +1,5 @@
-const orderId = localStorage.getItem('orderId');
 //récuperation de l'Id de la commande
+const orderId = localStorage.getItem('orderId');
 if (!orderId) {
   window.location.href = 'index.html';
 }
