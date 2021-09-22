@@ -1,0 +1,133 @@
+header {
+  background-color: #f2f2f2;
+}
+
+.navbar {
+  padding: 0;
+  margin-bottom: 30px;
+  max-width: 1440px;
+}
+.nav-link {
+  font-size: 20px;
+}
+
+.navbar-menu ul {
+  list-style-type: none;
+  margin: 0;
+}
+.navbar-menu ul li {
+  display: inline-flex;
+  flex-direction: row;
+}
+.navbar-menu ul li a {
+  color: inherit;
+  font-weight: 500;
+}
+
+.fa-shopping-cart {
+  color: darkviolet;
+}
+.btn-accueil {
+  font-size: 1.3em;
+  font-weight: bold;
+  padding: 30px 0 30px 30px;
+  color: inherit;
+}
+.container-panier {
+  margin: 30px;
+}
+.container-panier-vide {
+  text-align: center;
+  font-weight: initial;
+  font-size: 2rem;
+}
+.produit-panier {
+  padding-bottom: 20px;
+}
+.produit-panier ul {
+  list-style-type: none;
+}
+.produit-panier ul li {
+  display: inline-flex;
+  flex-direction: row;
+  padding-right: 15px;
+}
+.produit-panier ul li p {
+  font-weight: bold;
+}
+.produit-panier ul li:nth-child(1) p {
+  border-bottom: 2px solid black;
+}
+.vider-panier {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.afficher-prix {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.formulaire {
+  margin: 30px;
+}
+h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 20px;
+}
+.formulaire-validation {
+  border: 1px solid rgb(235, 221, 231);
+  background-color: rgb(235, 221, 231);
+}
+.form-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding-bottom: 20px;
+}
+#prenom {
+  padding-top: 20px;
+}
+label {
+  align-content: space-around;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+input {
+  width: 400px;
+  padding: 0;
+}
+#address-mail {
+  padding-bottom: 20px;
+}
+.form-commande {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
+
+.footer-contact {
+  background-color: #f2f2f2;
+  text-align: center;
+  align-content: center;
+}
+.footer-mail {
+  color: black;
+  font-weight: bold;
+}
+@media screen and (max-width: 500px) {
+  input {
+    width: 100%;
+  }
+  .formulaire {
+    margin: 20px;
+  }
+}
